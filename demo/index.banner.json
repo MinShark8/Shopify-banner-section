@@ -1,0 +1,246 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "el_slideshow_fwJLJB": {
+      "type": "el-slideshow",
+      "blocks": {
+        "item_XtUpy7": {
+          "type": "item",
+          "settings": {
+            "text_box_position": "absolute-middle-right",
+            "text_alignment": "el-text-left",
+            "animation": "animation-right-to-left",
+            "image": "shopify://shop_images/slide-1_1.jpg",
+            "preheading": "New arivals",
+            "heading": "Radiant Skin Starts Here",
+            "subheading": "<p>Clean formulas, modern beauty.</p>",
+            "button_label": "Shop Skincare",
+            "button_link": "shopify://collections/all",
+            "button_style": "light",
+            "use_custom_colors_block": true,
+            "color_text_block": "#ffffff",
+            "use_overlay": true,
+            "colors_overlay": "#121212",
+            "overlay_opacity": 0.3
+          }
+        },
+        "item_LjQCVc": {
+          "type": "item",
+          "settings": {
+            "text_box_position": "absolute-middle-left",
+            "text_alignment": "el-text-left",
+            "animation": "animation-bottom-to-top",
+            "image": "shopify://shop_images/slide_1.jpg",
+            "preheading": "New arivals",
+            "heading": "Beauty That Feels Like You",
+            "subheading": "<p>Clean formulas, modern beauty.</p>",
+            "button_label": "Explore Collection",
+            "button_link": "shopify://collections/all",
+            "button_style": "light",
+            "use_custom_colors_block": true,
+            "color_text_block": "#ffffff",
+            "use_overlay": true,
+            "colors_overlay": "#000000",
+            "overlay_opacity": 0.3
+          }
+        },
+        "item_nGPmQU": {
+          "type": "item",
+          "settings": {
+            "text_box_position": "absolute-middle-center",
+            "text_alignment": "el-text-center",
+            "animation": "animation-bottom-to-top",
+            "image": "shopify://shop_images/slidev3_1.jpg",
+            "preheading": "New arivals",
+            "heading": "Healthy Hair Starts Here",
+            "subheading": "<p>Sulfate-free & paraben-free</p>",
+            "button_label": "Discover More",
+            "button_link": "shopify://collections/all",
+            "button_style": "light",
+            "use_custom_colors_block": true,
+            "color_text_block": "#ffffff",
+            "use_overlay": true,
+            "colors_overlay": "#121212",
+            "overlay_opacity": 0.3
+          }
+        }
+      },
+      "block_order": [
+        "item_XtUpy7",
+        "item_LjQCVc",
+        "item_nGPmQU"
+      ],
+      "name": "Slideshow v0",
+      "settings": {
+        "heading_size": 52,
+        "max_width": 320,
+        "image_height": "h-100vh",
+        "enable_navigation": true,
+        "enable_pagination": true,
+        "slider_visual": "",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "loop": true,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "heading_size_mobile": 40,
+        "image_height_mobile": "h-mb-500",
+        "custom_id": "",
+        "custom_class": ""
+      }
+    },
+    "rich_text_dxiXzt": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_mNVMtb": {
+          "type": "heading",
+          "settings": {
+            "heading": "Talk about your brand",
+            "heading_size": "h1"
+          }
+        },
+        "text_NRYaHJ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "button_XcUcKg": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_mNVMtb",
+        "text_NRYaHJ",
+        "button_XcUcKg"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "el_slideshow_v1_cbpEqL": {
+      "type": "el-slideshow-v1",
+      "blocks": {
+        "item_aAKYgg": {
+          "type": "item",
+          "settings": {
+            "text_alignment": "el-text-center",
+            "animation": "animation-left-right-odds",
+            "image": "shopify://shop_images/slide05_1.jpg",
+            "preheading": "New in",
+            "heading": "Repair. Restore. Renew.",
+            "subheading": "<p>Formulated to support skin repair and strengthen the natural barrier, this serum helps improve texture and resilience. With consistent use, skin feels healthier, firmer, and more refreshed.</p>",
+            "button_label": "Discover More",
+            "button_link": "shopify://collections/all",
+            "button_style": "dark",
+            "use_custom_colors_block": true,
+            "color_text_block": "#ffffff",
+            "color_background_block": "#9b8167",
+            "use_overlay": false,
+            "colors_overlay": "#000000",
+            "overlay_opacity": 0.3
+          }
+        },
+        "item_wRn7jp": {
+          "type": "item",
+          "settings": {
+            "text_alignment": "el-text-center",
+            "animation": "animation-left-right-odds",
+            "image": "shopify://shop_images/slide04_1.jpg",
+            "preheading": "New in",
+            "heading": "Brighter Skin, Refined Texture",
+            "subheading": "<p>This advanced brightening serum works to improve uneven skin tone and dullness. It enhances your skin’s natural radiance while helping create a clearer, more luminous complexion over time.</p>",
+            "button_label": "View Collection",
+            "button_link": "shopify://collections/all",
+            "button_style": "dark",
+            "use_custom_colors_block": true,
+            "color_text_block": "#ffffff",
+            "color_background_block": "#9b8167",
+            "use_overlay": false,
+            "colors_overlay": "#000000",
+            "overlay_opacity": 0.3
+          }
+        }
+      },
+      "block_order": [
+        "item_aAKYgg",
+        "item_wRn7jp"
+      ],
+      "name": "Slideshow v1",
+      "settings": {
+        "image_width": "7",
+        "heading_size": 42,
+        "max_width": 640,
+        "image_height": "h-700",
+        "enable_navigation": true,
+        "enable_pagination": true,
+        "slider_visual": "fraction",
+        "auto_rotate": true,
+        "change_slides_speed": 9,
+        "loop": true,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "heading_size_mobile": 40,
+        "image_height_mobile": "h-mb-500",
+        "custom_id": "",
+        "custom_class": ""
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "all",
+        "products_to_show": 8,
+        "title": "Featured products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "el_slideshow_fwJLJB",
+    "rich_text_dxiXzt",
+    "el_slideshow_v1_cbpEqL",
+    "featured_collection"
+  ]
+}

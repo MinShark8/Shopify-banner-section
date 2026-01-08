@@ -1,0 +1,485 @@
+{{ 'el-banner.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'el-banner.js' | asset_url }}" defer></script>
+
+{% style %}
+    .section-extras-spacing-{{ section.id }} {
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+
+    {% if section.settings.use_custom_colors %}
+        .section-extras-color-{{ section.id }} {
+        --gradient-background: {% if section.settings.color_background_gradient != blank %}{{ section.settings.color_background_gradient }}{% else %}{{ section.settings.color_background }}{% endif %};
+        --color-background: {{ section.settings.color_background.red }}, {{ section.settings.color_background.green }}, {{ section.settings.color_background.blue }};
+        --color-foreground: {{ section.settings.color_text.red }}, {{ section.settings.color_text.green }}, {{ section.settings.color_text.blue }};
+        }
+    {% endif %}
+{% endstyle %}
+
+<div
+        class="el-banner section-extras-spacing section-extras-spacing-{{ section.id }}
+
+      {% if section.settings.custom_class != blank %} {{ section.settings.custom_class }}{% endif %}
+    "
+        {% if section.settings.custom_id != blank %}
+            id="{{ section.settings.custom_id }}"
+        {% endif %}
+>
+    <div class="position-relative {{ section.settings.layout }}">
+        <div
+                class="cs-card card-banner  {% if section.settings.use_custom_colors %} section-extras-color section-extras-color-{{ section.id }} {% endif %}"
+        >
+            <div class="clearfix position-relative">
+                <div class="row-custom {% if section.settings.style_layout == 'style-1' %} row-reverse-desktop{% endif %}">
+                    <div class="col-custom col-custom-image position-relative overflow-hidden">
+                        <div class="card-img-top {% if section.settings.image_height == 'adapt' %} card-adapt{% else %} card-img-custom-height {{ section.settings.image_height }} {% endif %}">
+                          {% if section.settings.label_link %}
+                            <a class="full-width-link" aria-label="{{ section.settings.label_link }}"
+                               href="{{ section.settings.label_link }}">
+                              <span class="visually-hidden">{{ section.settings.label_link }}</span>
+                            </a>
+                          {% endif %}
+                          {% if section.settings.image != blank %}
+                                <div class="clearfix">
+                                    {{ section.settings.image | image_url: width: 1920 | image_tag }}
+                                </div>
+                            {% else %}
+                                <div class="clearfix">
+                                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg bg-body-tertiary' }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-custom col-custom-content position-relative">
+                        <div class="cs-card-body {{ section.settings.text_alignment }}">
+                            <div class="cs-card-body-inner"
+                                 style="max-width: {{ section.settings.max_width }}px">
+                                {% for block in section.blocks %}
+                                    {% case block.type %}
+                                        {% when 'heading' %}
+                                            {% style %}
+                                                .heading-{{ block.id }}{
+                                                --heading-size: {{ block.settings.heading_size }}px;
+                                                --heading-size-mobile: {{ block.settings.heading_size_mobile }}px;
+                                                }
+                                            {% endstyle %}
+                                            <h2 class="el-heading heading-{{ block.id }}">{{ block.settings.heading }}</h2>
+                                        {% when 'text' %}
+                                            <div class="rte el-text">
+                                                {{ block.settings.text }}
+                                            </div>
+                                        {% when 'button' %}
+                                            {% if block.settings.button_link and block.settings.button_label != blank %}
+                                                <div class="el-button">
+                                                    <a
+                                                            {% if block.settings.button_link == blank %}
+                                                                role="link" aria-disabled="true"
+                                                            {% else %}
+                                                                href="{{ block.settings.button_link }}"
+                                                            {% endif %}
+                                                            class="btn btn-{{ block.settings.button_style }}"
+                                                    >
+                                                        <span>{{- block.settings.button_label | escape -}}</span>
+                                                    </a>
+                                                </div>
+                                            {% endif %}
+                                        {% when 'code' %}
+                                            <div
+                                                    class="el-code"
+                                                    {{ block.shopify_attributes }}
+                                            >
+                                                <div class="form-sm">
+                                                    <code-copier class="clearfix">
+                                                        <input id="discount-code" class="custom-code text-center"
+                                                               aria-label="{{ block.settings.code_button }}"
+                                                               type="text"
+                                                               value="{{ block.settings.code | strip_html }}"
+                                                               data-js-code>
+                                                        <button class="btn btn-primary mw-auto ms-1" data-js-btn
+                                                                data-success="{{ block.settings.code_active }}"
+                                                                data-default="{{ block.settings.code_button }}">
+                                                            {{ block.settings.code_button }}
+                                                        </button>
+                                                    </code-copier>
+                                                    {% if block.settings.text != blank %}
+                                                        <p class="el-info">{{ block.settings.text }}</p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        {% when 'image' %}
+                                            <div class="image-animation z-index-10 {{ block.settings.image_animation_position }}">
+                                                <div class="image-animation-inner {{ block.settings.image_animation_style }}">
+                                                    {% if block.settings.image_animation %}
+                                                        {% render 'image', lazyload: true, image: block.settings.image_animation, size: 'small' %}
+                                                    {% else %}
+                                                        {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg bg-white' }}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                    {% endcase %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+  "name": "Banner Creative",
+  "tag": "section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "full",
+          "label": "Fullwidth"
+        },
+        {
+          "value": "page-width-desktop",
+          "label": "Container"
+        }
+      ],
+      "default": "full",
+      "label": "Style container"
+    },
+    {
+      "type": "select",
+      "id": "style_layout",
+      "options": [
+        {
+          "value": "none",
+          "label": "Default"
+        },
+        {
+          "value": "style-1",
+          "label": "Style 1"
+        }
+      ],
+      "default": "none",
+      "label": "Style layout"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "label_link",
+      "default": "/collections/all",
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt"
+        },
+        {
+          "value": "h-300",
+          "label": "300px"
+        },
+        {
+          "value": "h-350",
+          "label": "350px"
+        },
+        {
+          "value": "h-400",
+          "label": "400px"
+        },
+        {
+          "value": "h-450",
+          "label": "450px"
+        },
+        {
+          "value": "h-500",
+          "label": "500px"
+        },
+        {
+          "value": "h-550",
+          "label": "550px"
+        },
+        {
+          "value": "h-600",
+          "label": "600px"
+        },
+        {
+          "value": "h-650",
+          "label": "650px"
+        },
+        {
+          "value": "h-700",
+          "label": "700px"
+        },
+        {
+          "value": "h-800",
+          "label": "800px"
+        }
+      ],
+      "default": "adapt",
+      "label": "Image height"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 300,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Max width",
+      "default": 600
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "text alignment",
+      "options": [
+        {
+          "value": "el-text-left",
+          "label": "Left"
+        },
+        {
+          "value": "el-text-center",
+          "label": "Center"
+        },
+        {
+          "value": "el-text-right",
+          "label": "Right"
+        }
+      ],
+      "default": "el-text-left"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_custom_colors",
+      "default": false,
+      "label": "Use custom colors"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Color text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Color background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "header",
+      "content": "Custom"
+    },
+    {
+      "type": "text",
+      "id": "custom_id",
+      "label": "Custom id"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom class"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "code",
+      "name": "Code",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "default": "Up to 20% OFF. Use Coupon",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "code",
+          "default": "FREESHIP20",
+          "label": "Code"
+        },
+        {
+          "type": "text",
+          "id": "code_button",
+          "default": "COPY",
+          "label": "Button label"
+        },
+        {
+          "type": "text",
+          "id": "code_active",
+          "default": "COPIED",
+          "label": "Code active"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Heading",
+          "label": "Heading"
+        },
+        {
+          "type": "range",
+          "id": "heading_size",
+          "min": 16,
+          "max": 100,
+          "step": 2,
+          "default": 40,
+          "unit": "px",
+          "label": "Heading size"
+        },
+        {
+          "type": "range",
+          "id": "heading_size_mobile",
+          "min": 16,
+          "max": 100,
+          "step": 2,
+          "default": 28,
+          "unit": "px",
+          "label": "Heading size mobile"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Colorful and classic.match well with your daily wear.Perfectly fit for women wearing in house, bathroom, office, hotel, yard, garden and etc.</p>",
+          "label": "Content"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Buy it now",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "default": "/collections/all",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "light",
+              "label": "White"
+            },
+            {
+              "value": "dark",
+              "label": "Dark"
+            }
+          ],
+          "default": "primary",
+          "label": "Button style"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "El banner",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
